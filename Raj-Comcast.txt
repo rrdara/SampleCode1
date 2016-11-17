@@ -1,0 +1,42 @@
+Step 1 — Installing Apache and PHP-FPM.This is libapache2-mod-fastcgi, available in Ubuntu's multiverse repository, which must first be enabled in the sources.list file.
+
+sudo nano /etc/apt/sources.list
+
+ deb http://mirrors.digitalocean.com/ubuntu trusty multiverse
+ deb http://mirrors.digitalocean.com/ubuntu trusty-updates multiverse
+
+sudo apt-get update
+
+Then install the necessary packages.
+
+sudo apt-get install apache2 libapache2-mod-fastcgi php5-fpm
+
+
+Step 2 — Configuring Apache and PHP5-FPM
+In this step we will change Apache's port number to 8080 and configure it to work with PHP5-FPM using the mod_fastcgi module. Edit the Apache configuration file and change the port number of Apache.
+
+sudo nano /etc/apache2/ports.conf
+Find the following line:
+
+Listen 80
+Change it to:
+
+Listen 8080
+Save and exit ports.conf.
+
+Certificates:
+Create a directory for the SSL certificates and their private keys.
+
+sudo mkdir /etc/nginx/ssl
+
+Generate self-signed certificate
+sudo openssl req -x509 -sha256 -newkey rsa:2048 -keyout /etc/nginx/ssl/test.net-key.pem -out
+
+Configuration Test:
+perform a configuration test.
+
+sudo service nginx configtest [Nginx is a server here]
+
+Reload Nginx if the test succeeds.
+
+sudo service nginx reload
